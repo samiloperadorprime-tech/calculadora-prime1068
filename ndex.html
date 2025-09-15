@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Puntos - Prime 1068</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4">
+
+<div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+
+    <h1 class="text-3xl font-bold text-center mb-6 text-blue-600">Calculadora de Puntos Prime 1068</h1>
+    <p class="text-center text-gray-600 mb-8">Ingresa los cortes de tu panel para calcular los puntos generados.</p>
+
+    <!-- Sección de Entrada de Datos -->
+    <div class="mb-8 p-4 bg-blue-50 rounded-lg">
+        <h2 class="text-xl font-bold mb-4">1. Ingresa el Corte Anterior y el Corte Actual</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="corte-anterior" class="block text-sm font-medium text-gray-700">Corte Anterior (Ej: 1000)</label>
+                <input type="number" step="0.01" id="corte-anterior" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="0.00">
+            </div>
+            <div>
+                <label for="corte-actual" class="block text-sm font-medium text-gray-700">Corte Actual (Ej: 1500)</label>
+                <input type="number" step="0.01" id="corte-actual" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="0.00">
+            </div>
+        </div>
+        <button onclick="calcularPuntos()" class="mt-4 w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition">
+            🧮 Calcular Puntos Generados
+        </button>
+    </div>
+
+    <!-- Resultado -->
+    <div id="resultado" class="hidden mb-8 p-6 bg-green-50 border border-green-200 rounded-lg">
+        <h2 class="text-2xl font-bold text-green-700 mb-2">🎉 ¡Cálculo Completo!</h2>
+        <p class="text-lg"><strong>Corte Anterior:</strong> <span id="res-anterior" class="font-bold">0.00</span> pts</p>
+        <p class="text-lg"><strong>Corte Actual:</strong> <span id="res-actual" class="font-bold">0.00</span> pts</p>
+        <hr class="my-4">
+        <p class="text-3xl font-extrabold text-green-600">Puntos Generados: <span id="res-generados" class="text-4xl">0.00</span> pts</p>
+    </div>
+
+    <!-- Instrucciones -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+        <h2 class="text-xl font-bold mb-3">📌 Instrucciones para Principiantes</h2>
+        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+            <li>Ve a tu panel de estadísticas (`datame.cloud`).</li>
+            <li>Anota el número total de puntos del día anterior (Corte Anterior).</li>
+            <li>Anota el número total de puntos del día de hoy (Corte Actual).</li>
+            <li>Ingresa esos dos números en los campos de arriba.</li>
+            <li>¡Haz clic en "Calcular" y listo! Verás cuántos puntos generó tu turno.</li>
+        </ol>
+    </div>
+
+</div>
+
+<script>
+    function calcularPuntos() {
+        // Obtener los valores de los inputs
+        const corteAnterior = parseFloat(document.getElementById('corte-anterior').value) || 0;
+        const corteActual = parseFloat(document.getElementById('corte-actual').value) || 0;
+
+        // Calcular la diferencia (puntos generados)
+        const puntosGenerados = corteActual - corteAnterior;
+
+        // Mostrar los resultados
+        document.getElementById('res-anterior').textContent = corteAnterior.toFixed(2);
+        document.getElementById('res-actual').textContent = corteActual.toFixed(2);
+        document.getElementById('res-generados').textContent = puntosGenerados.toFixed(2);
+
+        // Mostrar la sección de resultado
+        document.getElementById('resultado').classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
